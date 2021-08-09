@@ -1,16 +1,16 @@
+package dominio;
+
 public class Conta {
     private String numeroConta;
     private String numeroAgencia;
-    private float saldo;
     private String chavePix[] = new String[3];
-    private String tipoConta = "corrente";
-    private String cpfCorrentista;
-    private String nomeCorrentista;
+    private float saldo;
+    private int chequeEspecial = 500;
 
-    public float getSaldo() {
+    public float consultarSaldo() {
         return saldo;
     }
-    public void setSaldo(float saldo) {
+    public void depositar(float saldo) {
         this.saldo = saldo;
     }
     public void setNumeroConta(String numeroConta) {
@@ -18,9 +18,6 @@ public class Conta {
     }
     public void setNumeroAgencia(String numeroAgencia) {
         this.numeroAgencia = numeroAgencia;
-    }
-    public void setNomeCorrentista(String correntista) {
-        this.nomeCorrentista = correntista;
     }
 
     public void adicionarChavePix(String chavePix){
@@ -39,18 +36,14 @@ public class Conta {
         return chavePix[posicao];
     }
 
-    public String getNomeCorrentista() {
-        return nomeCorrentista;
+    public void sacar(float valorSaque){
+        this.saldo -= valorSaque;
     }
 
-    public void depositar(float valorDeposito) {
-        setSaldo(saldo + valorDeposito);
+   public void transferir(float valorDaTransf, Conta outraConta) {
+       sacar(valorDaTransf);
+       outraConta.depositar(valorDaTransf);
     }
-
-//    public void transferir(float valorDaTransf, Conta outraConta) {
-//        sacar(valorDaTransf);
-//        outraConta.depositar(valorDaTransf);
-//    }
 
 }
 
